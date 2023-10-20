@@ -61,4 +61,24 @@ export class UserService {
 			}
 		})
 	}
+	async toggleFavorite(id: number, dealId: number) {
+		const user = await this.byId(id)
+
+		if (!user) throw new NotFoundException('User not found!')
+
+		const isExist = user.favorites.some(deal => deal.id === dealId)
+
+		await this.prisma.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				favorites: {
+					[isExist ? 'disconnect' : 'connect']: {
+						id: dealId
+					}
+				}
+			}
+		})
+	}
 }
