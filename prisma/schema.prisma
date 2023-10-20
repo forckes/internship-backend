@@ -17,15 +17,20 @@ model User {
   name       String?
   avatarPath String  @default("/uploads/default-avatar.png") @map("avatar_path")
   phone      String  @default("")
+
+  favorites Deal[]
 }
 
-model Deals {
+model Deal {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   title   String
   options Option[]
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @map("user_id")
 }
 
 model Option {
@@ -34,6 +39,6 @@ model Option {
   label String?
   value String
 
-  Deals   Deals? @relation(fields: [dealsId], references: [id])
-  dealsId Int?
+  deal   Deal? @relation(fields: [dealId], references: [id])
+  dealId Int?  @map("deal_id")
 }
