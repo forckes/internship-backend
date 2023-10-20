@@ -32,8 +32,8 @@ model Deal {
 
   options Option[]
 
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?  @map("user_id")
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
 }
 
 model Option {
