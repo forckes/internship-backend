@@ -6,6 +6,6 @@ async function bootstrap() {
 
 	app.setGlobalPrefix('api')
 	app.enableCors()
-	await app.listen(process.env.PORT || 4200)
+	await app.listen('https://elegant-pink-pants.cyclic.app')
 }
 bootstrap()
